@@ -14,6 +14,7 @@ import daniel.wander.math.Wanderer;
 public class Main extends JFrame {
 	
 	Canvas canvas = new Canvas();
+	static float BACKGROUND_COLOR = 0.8f;
 	
 	Wanderer[] wanderers = new Wanderer[1];
 	
@@ -26,7 +27,7 @@ public class Main extends JFrame {
 		setSize(1200, 800);
 		setLocationRelativeTo(null);
 		setTitle("Wandering");
-		setBackground(new Color(0x5f5f5f));
+		setBackground(new Color(BACKGROUND_COLOR, BACKGROUND_COLOR, BACKGROUND_COLOR));
 		
 		add(canvas);
 		
