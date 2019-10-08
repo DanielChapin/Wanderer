@@ -17,7 +17,11 @@ public class Vector {
 		return vector;
 	}
 	
-	public Vector withMagnitude(float magnitude) {
+	public static Vector random() {
+		return new Vector(1d - 2d * Math.random(), 1d - 2d * Math.random());
+	}
+	
+	public Vector withMagnitude(double magnitude) {
 		Vector vector = new Vector(this.x, this.y);
 		vector.normalize();
 		vector.x *= magnitude;

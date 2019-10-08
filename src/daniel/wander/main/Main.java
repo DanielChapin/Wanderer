@@ -14,7 +14,10 @@ import daniel.wander.math.Wanderer;
 public class Main extends JFrame {
 	
 	Canvas canvas = new Canvas();
-	static float BACKGROUND_COLOR = 0.8f;
+	
+	static final float BACKGROUND_COLOR = 0.8f;
+	
+	static final int FPS = 60;
 	
 	Wanderer[] wanderers = new Wanderer[1];
 	
@@ -35,16 +38,16 @@ public class Main extends JFrame {
 		canvas.createBufferStrategy(3);
 		
 		for (int i = 0; i < wanderers.length; i++) {
-			wanderers[i] = new Wanderer(new Vector(Math.random() * getWidth(), Math.random() * getHeight()));
+			wanderers[i] = new Wanderer(new Vector(Math.random() * getWidth(), Math.random() * getHeight()), 5000, 20);
 			for (int j = 0; j < wanderers[i].getTrailLength(); j++)
-				wanderers[i].update(getRandomPoint());
+				wanderers[i].update(canvas.getSize());
 		}
 		
 		startLoop();
 	}
 	
 	void startLoop() {
-		long now = System.nanoTime(), lastLoop = now, loopTime = 1000000000 / 60;
+		long now = System.nanoTime(), lastLoop = now, loopTime = 1000000000 / FPS;
 		while (true) {
 			if ((now = System.nanoTime()) - lastLoop > loopTime) {
 				update();
@@ -56,7 +59,7 @@ public class Main extends JFrame {
 	
 	void update() {
 		for (Wanderer wanderer : wanderers)
-			wanderer.update(getRandomPoint());
+			wanderer.update(canvas.getSize());
 	}
 	
 	void render() {
@@ -68,10 +71,6 @@ public class Main extends JFrame {
 			wanderer.render(g);
 		g.dispose();
 		bs.show();
-	}
-	
-	Point getRandomPoint() {
-		return new Point((int) (Math.random() * getWidth()), (int) (Math.random() * getHeight()));
 	}
 
 }
